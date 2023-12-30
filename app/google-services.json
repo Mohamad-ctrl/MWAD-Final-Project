@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "826985314694",
+    "firebase_url": "https://bicycle-shop-af04b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bicycle-shop-af04b",
+    "storage_bucket": "bicycle-shop-af04b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826985314694:android:a2d9ccbd604588808c9407",
+        "android_client_info": {
+          "package_name": "com.example.mwadfinalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826985314694-sck3veo1hrg0o46621m2trc05nh45ali.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3cnYO9ODSpt_vOm7JYITXLlyLOtuo4zY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826985314694-sck3veo1hrg0o46621m2trc05nh45ali.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
