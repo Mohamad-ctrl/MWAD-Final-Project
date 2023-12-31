@@ -2,11 +2,14 @@ package com.example.mwadfinalproject
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.firebase.FirebaseApp
@@ -33,20 +36,23 @@ class MainActivity : AppCompatActivity() {
         val welcomeText = findViewById<TextView>(R.id.welcomeTextMainAct)
         val signOutButton: Button = findViewById(R.id.signOutButtonMainAct)
 
+        val homeIcon = findViewById<ImageView>(R.id.homeIconMainAct).drawable
+        homeIcon.setColorFilter(resources.getColor(R.color.GoldenColor), PorterDuff.Mode.SRC_IN)
+
         authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             if (user == null) {
                 // User is signed out, update UI accordingly
-                welcomeText.text = "Welcome, Guest"
                 signUp.visibility = View.VISIBLE
                 login.visibility = View.VISIBLE
                 signOutButton.visibility = View.GONE
+                welcomeText.visibility = View.GONE
             } else {
                 // User is signed in, update UI with the signed-in user's information
                 user.reload().addOnCompleteListener {
                     val updatedUser = FirebaseAuth.getInstance().currentUser
-                    val userName = updatedUser?.displayName ?: "User" // Default value if username is null
-                    welcomeText.text = "Welcome, $userName"
+                    val userName = user.displayName
+                    welcomeText.text = "Welcome, \n${userName ?: "User"}"
                     signUp.visibility = View.GONE
                     login.visibility = View.GONE
                     signOutButton.visibility = View.VISIBLE

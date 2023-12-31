@@ -3,13 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/OffWhite"
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <EditText
+        android:id="@+id/ConfoirmPasswordSignUpAct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:hint="Confirm Password"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
+
     <Button
         android:id="@+id/LoginBtnSignUpAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="95dp"
+        android:layout_height="41dp"
+        android:background="@drawable/custom_btn"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
@@ -18,11 +35,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignUpAct"
+        app:layout_constraintVertical_bias="0.81" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/usernameSignUpAct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -35,21 +52,20 @@
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/Age"
-        android:layout_width="0dp"
+        android:id="@+id/AgeSignUpAct"
+        android:layout_width="324dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:hint="Age"
-        android:imeActionLabel="@string/action_sign_in_short"
-        android:imeOptions="actionDone"
+        android:layout_marginTop="140dp"
         android:selectAllOnFocus="true"
+        android:hint="Date Of Birth"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/EmailSignUpAct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
@@ -61,10 +77,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passwordSignUpAct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
@@ -73,25 +89,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
 
     <Button
-        android:id="@+id/SignUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/SignUpBtnSignUpAct"
+        android:layout_width="95dp"
+        android:layout_height="41dp"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:background="@drawable/custom_btn"
         android:text="sign in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignUpAct"
+        app:layout_constraintVertical_bias="0.81" />
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/loadingSignUpAct"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,20 +116,80 @@
         android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="@+id/passwordSignUpAct"
+        app:layout_constraintStart_toStartOf="@+id/passwordSignUpAct"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/GenderTextViewSignUpAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSignUpAct"
+        android:layout_width="322dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+
+        <RadioButton
+            android:id="@+id/MaleRadioSignUpAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:text="Male"
+            android:textSize="16dp" />
+
+        <RadioButton
+            android:id="@+id/FemaleRadioSignUpAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:text="Female"
+            android:textSize="16dp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/ShowCalBtnSignUpAct"
+        android:layout_width="86dp"
+        android:layout_height="45dp"
+        android:text="Button"
+        android:background="@drawable/custom_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41" />
 
     <TextView
         android:id="@+id/ErrorTextSignUpAct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

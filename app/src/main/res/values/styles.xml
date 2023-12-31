@@ -2,5 +2,10 @@
 <resources>
     <style name="Theme.MWADFinalProject" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme attributes here -->
+        <item name="android:fontFamily">@font/font_family</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <style name="CustomTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/font_family</item>
     </style>
 </resources>

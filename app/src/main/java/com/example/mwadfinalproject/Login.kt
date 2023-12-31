@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -20,6 +22,7 @@ class Login : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,124 +34,62 @@ class Login : AppCompatActivity() {
         val LoginBtn = findViewById<Button>(R.id.LoginUpBtnLoginAct)
         val loginFiled = findViewById<EditText>(R.id.EmailLoginAct)
         val passwordFiled = findViewById<EditText>(R.id.passwordLoginAct)
+        val signUpBtn = findViewById<Button>(R.id.signUpBtnLoginAct)
+        val forgotPassBtn = findViewById<Button>(R.id.ForgotPassBtnLoginAct)
         LoginBtn.setOnClickListener{
                 if ((loginFiled.text.toString() == "admin") && (passwordFiled.text.toString() == "admin")) {
                     val Intent = Intent(this, adminLogin::class.java)
                     startActivity(Intent)
                 } else {
-                    loginUser(loginFiled.text.toString(), passwordFiled.text.toString())
+                    loginUser(loginFiled.text.toString().trim(), passwordFiled.text.toString())
             }
         }
+        signUpBtn.setOnClickListener {
+            val Intent = Intent(this, SignUp::class.java)
+            startActivity(Intent)
+        }
+        forgotPassBtn.setOnClickListener {
+            val Intent = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(Intent)
+        }
+
 
     }
 
-    private fun loginUser(emailOrUsername: String, password: String) {
-        val usersRef = database.getReference("users")
+    private fun loginUser(email: String, password: String) {
         val errorText = findViewById<TextView>(R.id.ErrorTextLogin)
 
-        if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailOrUsername).matches()) {
-            // Input is an email
-            auth.signInWithEmailAndPassword(emailOrUsername, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        if (user != null && !user.isEmailVerified) {
-                            user.sendEmailVerification()
-                                .addOnCompleteListener { verificationTask ->
-                                    if (verificationTask.isSuccessful) {
-                                        errorText.text =
-                                            "Please check your email to verify your email"
-                                        Log.d("LoginActivity", "Verification email sent")
-                                    } else {
-                                        errorText.text = "Error in verification"
-                                        Log.e(
-                                            "LoginActivity",
-                                            "Error in verification",
-                                            verificationTask.exception
-                                        )
-                                    }
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    if (user != null && !user.isEmailVerified) {
+                        user.sendEmailVerification()
+                            .addOnCompleteListener { verificationTask ->
+                                if (verificationTask.isSuccessful) {
+                                    errorText.text = "Please check your email to verify your email"
+                                    Log.d("LoginActivity", "Verification email sent")
+                                } else {
+                                    errorText.text = "Error in verification"
+                                    Log.e(
+                                        "LoginActivity",
+                                        "Error in verification",
+                                        verificationTask.exception
+                                    )
                                 }
-                        } else {
-                            Log.d("LoginActivity", "User logged in: ${user?.uid}")
-                            startActivity(Intent(this@Login, MainActivity::class.java))
-                            // Proceed to the next screen or perform required action
-                        }
-                    } else {
-                        errorText.text = "Login failed: ${task.exception?.message}"
-                        Log.e("LoginActivity", "Login failed: ${task.exception}")
-                    }
-                }
-        } else {
-            // Input is a username
-            usersRef.orderByChild("username").equalTo(emailOrUsername)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            val userSnapshot = dataSnapshot.children.first()
-                            val userEmail = userSnapshot.child("email").getValue(String::class.java)
-                            if (userEmail != null) {
-                                auth.signInWithEmailAndPassword(userEmail, password)
-                                    .addOnCompleteListener(this@Login) { task ->
-                                        if (task.isSuccessful) {
-                                            val user = auth.currentUser
-                                            if (user != null && !user.isEmailVerified) {
-                                                user.sendEmailVerification()
-                                                    .addOnCompleteListener { verificationTask ->
-                                                        if (verificationTask.isSuccessful) {
-                                                            errorText.text = "Please check your email to verify your email"
-                                                            Log.d("LoginActivity", "Verification email sent")
-                                                        } else {
-                                                            errorText.text = "Error in verification"
-                                                            Log.e(
-                                                                "LoginActivity",
-                                                                "Error in verification",
-                                                                verificationTask.exception
-                                                            )
-                                                        }
-                                                    }
-                                            } else {
-                                                val userName = userSnapshot.child("username").getValue(String::class.java)
-                                                if (userName != null) {
-                                                    val profileUpdates =
-                                                        UserProfileChangeRequest.Builder()
-                                                            .setDisplayName(userName)
-                                                            .build()
-                                                    user?.updateProfile(profileUpdates)
-                                                        ?.addOnCompleteListener { updateTask ->
-                                                            if (updateTask.isSuccessful) {
-                                                                Log.d(
-                                                                    "LoginActivity",
-                                                                    "Username updated: $userName"
-                                                                )
-                                                            }
-                                                        }
-                                                }
-                                                startActivity(Intent(this@Login, MainActivity::class.java))
-                                            }
-                                        } else {
-                                            errorText.text = "User Name or Password is Wrong"
-                                            Log.e("LoginActivity", "Login failed: ${task.exception}")
-                                        }
-                                    }
-                            } else {
-                                errorText.text = "No email found for the username"
                             }
-                        } else {
-                            errorText.text = "Username not found"
-                        }
+                    } else {
+                        startActivity(Intent(this@Login, MainActivity::class.java))
                     }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        errorText.text =
-                            "Error checking username existence: ${databaseError.message}"
-                        Log.e(
-                            "LoginActivity",
-                            "Error checking username existence: ${databaseError.message}"
-                        )
-                    }
-                })
-        }
+                } else {
+                    errorText.text = "Login failed: ${task.exception?.message}"
+                    Log.e("LoginActivity", "Login failed: ${task.exception}")
+                }
+            }
     }
+
+
+
 
 
 //    private fun loginUser(email: String, password: String) {

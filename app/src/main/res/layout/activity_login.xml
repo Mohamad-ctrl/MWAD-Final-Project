@@ -16,10 +16,25 @@
         android:text="Sing Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLoginAct"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <Button
+        android:id="@+id/ForgotPassBtnLoginAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="64dp"
+        android:text="Forgot Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLoginAct"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintVertical_bias="0.068" />
 
     <EditText
         android:id="@+id/EmailLoginAct"
@@ -57,12 +72,13 @@
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLoginAct"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.068" />
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/loadingLoginAct"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
