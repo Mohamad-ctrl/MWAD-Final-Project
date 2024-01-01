@@ -8,6 +8,18 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/AdminScreenMainAct"
+        android:layout_width="95dp"
+        android:layout_height="41dp"
+        android:background="@drawable/custom_btn"
+        android:text="Admin Screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379" />
+
+    <Button
         android:id="@+id/signOutButtonMainAct"
         android:layout_width="95dp"
         android:layout_height="41dp"
@@ -95,7 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
             android:layout_marginTop="7dp"
-            android:src="@drawable/ic_home" />
+            android:clickable="true"
+            android:src="@drawable/ic_home"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/homeTextMainAct"

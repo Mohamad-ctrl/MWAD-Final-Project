@@ -35,7 +35,12 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val welcomeText = findViewById<TextView>(R.id.welcomeTextMainAct)
         val signOutButton: Button = findViewById(R.id.signOutButtonMainAct)
+        val AdminScreenBtn = findViewById<Button>(R.id.AdminScreenMainAct)
 
+        AdminScreenBtn.setOnClickListener {
+            intent = Intent(this, adminLogin::class.java)
+            startActivity(intent)
+        }
         val homeIcon = findViewById<ImageView>(R.id.homeIconMainAct).drawable
         homeIcon.setColorFilter(resources.getColor(R.color.GoldenColor), PorterDuff.Mode.SRC_IN)
 

@@ -1,10 +1,12 @@
 package com.example.mwadfinalproject
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,6 +20,8 @@ class ResetPasswordActivity : AppCompatActivity() {
 
         val resetButton = findViewById<Button>(R.id.SendEmailBtnResestPassAct)
         val emailEditText = findViewById<EditText>(R.id.EmailFieldResetPassAct)
+        val profileIcon = findViewById<ImageView>(R.id.profileIconResetPassAct).drawable
+        profileIcon.setColorFilter(resources.getColor(R.color.GoldenColor), PorterDuff.Mode.SRC_IN)
 
         resetButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()

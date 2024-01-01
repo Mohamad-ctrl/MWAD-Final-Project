@@ -38,6 +38,7 @@ class Login : AppCompatActivity() {
         val forgotPassBtn = findViewById<Button>(R.id.ForgotPassBtnLoginAct)
         LoginBtn.setOnClickListener{
                 if ((loginFiled.text.toString() == "admin") && (passwordFiled.text.toString() == "admin")) {
+                    val user = auth.currentUser
                     val Intent = Intent(this, adminLogin::class.java)
                     startActivity(Intent)
                 } else {
