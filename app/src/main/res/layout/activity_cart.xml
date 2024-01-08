@@ -4,49 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/OffWhite"
-    tools:context=".MainActivity">
-
-
-    <Button
-        android:id="@+id/signOutButtonMainAct"
-        android:layout_width="95dp"
-        android:layout_height="41dp"
-        android:background="@drawable/custom_btn"
-        android:text="Sign Out"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-
-
-    <TextView
-        android:id="@+id/welcomeTextMainAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+    tools:context=".Cart">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMainAct"
+        android:id="@+id/recyclerViewCartAct"
         android:layout_width="match_parent"
-        android:layout_height="557dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.676" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -82,6 +51,7 @@
             android:clickable="true"
             android:onClick="cartIcon"
             android:src="@drawable/ic_cart"
+            app:tint="@color/GoldenColor"
             android:focusable="true" />
         <ImageView
             android:id="@+id/homeIconMainAct"
@@ -90,8 +60,9 @@
             android:layout_marginLeft="56dp"
             android:layout_marginTop="7dp"
             android:src="@drawable/ic_home"
+            android:onClick="homeIcon"
             android:focusable="true"
-            app:tint="@color/GoldenColor" />
+            app:tint="@color/black" />
 
         <TextView
             android:id="@+id/homeTextMainAct"
@@ -99,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50.5dp"
             android:layout_marginTop="30dp"
-            android:textColor="@color/GoldenColor"
+            android:textColor="@color/black"
             android:text="Home" />
 
         <TextView
@@ -109,7 +80,7 @@
             android:layout_marginLeft="193dp"
             android:layout_marginTop="30dp"
             android:text="Cart"
-            android:textColor="@color/black" />
+            android:textColor="@color/GoldenColor" />
 
         <TextView
             android:id="@+id/profileTextMainAct"
@@ -123,15 +94,55 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="125dp"
-        android:layout_height="120dp"
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13523$"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.742" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="ForgotPassBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintVertical_bias="0.87">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continue Shopping"
+            android:textColor="#424242"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="194dp" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/checkOutButton"
+        android:layout_width="149dp"
+        android:layout_height="43dp"
+        android:background="@drawable/custom_btn"
+        android:text="Checkout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.822" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

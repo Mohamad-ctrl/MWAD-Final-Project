@@ -1,0 +1,87 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="250dp"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:ignore="ExtraText">
+
+    <!-- Bicycle Image -->
+    <ImageView
+        android:id="@+id/imageBicycle"
+        android:layout_width="135dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bicycle_1" />
+
+    <!-- Brand -->
+    <TextView
+        android:id="@+id/textBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Brand"
+        android:textStyle="bold" />
+
+
+    <!-- Price Text -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Price TextView -->
+        <TextView
+            android:id="@+id/textPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="99.99" />
+
+        <!-- Dollar sign TextView -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$" />
+    </LinearLayout>
+
+    <!-- Replace with your price -->
+
+    <!-- Read More Button -->
+    <Button
+        android:id="@+id/buttonReadMore"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_btn"
+        android:text="Read more" />
+
+    <!-- Add to Cart Icon -->
+    <LinearLayout
+        android:id="@+id/AddToCart"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/imageAddToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_to_cart"
+            android:layout_marginRight="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

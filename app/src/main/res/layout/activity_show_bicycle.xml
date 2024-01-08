@@ -4,119 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".ShowBicycle">
 
-
-    <EditText
-        android:id="@+id/EmailLoginAct"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/passwordLoginAct"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/prompt_password"
-        android:imeActionLabel="@string/action_sign_in_short"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailLoginAct" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="ForgotPassBtn"
+    <ImageView
+        android:id="@+id/bikeImageShowBikeAct"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:src="@drawable/bicycle_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forogot Password "
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="149dp"
-            tools:layout_editor_absoluteY="194dp" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="NotRegisteredBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not Registered Yet ?"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="149dp"
-            tools:layout_editor_absoluteY="194dp" />
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/LoginBtnLoginAct"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/custom_btn"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLoginAct"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <ProgressBar
-        android:id="@+id/loadingLoginAct"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/passwordLoginAct"
-        app:layout_constraintStart_toStartOf="@+id/passwordLoginAct"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.043"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/ErrorTextLogin"
+        android:id="@+id/BrandTextShowBikeAct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Test Brand Name"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296" />
+
+    <TextView
+        android:id="@+id/ModelTextShowBikeAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Model Name"
+        android:textColor="#424242"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintVertical_bias="0.353" />
+
+    <TextView
+        android:id="@+id/descriptionTitleTextShowBikeAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <TextView
+        android:id="@+id/descriptionTextShowBikeAct"
+        android:layout_width="391dp"
+        android:layout_height="wrap_content"
+        android:text="Electric bicycle in excellent condition, has complete maintenance, Electrobike brand, Cross model, white, includes charger and battery key"
+        android:textColor="#424242"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.539" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="addToCart"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageAddToCart"
+            android:layout_width="38dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_add_to_cart" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.681" />
+
+    <TextView
+        android:id="@+id/pricTextShowBikeAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9000$"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -133,7 +141,7 @@
         tools:ignore="MissingConstraints" >
 
         <ImageView
-            android:id="@+id/profileIconLoginAct"
+            android:id="@+id/profileIconMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="331dp"
@@ -141,40 +149,40 @@
             android:clickable="true"
             android:onClick="profileIcon"
             android:src="@drawable/ic_profile"
-            app:tint="@color/GoldenColor" />
+            android:focusable="true" />
 
         <ImageView
-            android:id="@+id/cartIconLoginAct"
+            android:id="@+id/cartIconMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="194dp"
             android:layout_marginTop="7dp"
             android:clickable="true"
             android:onClick="cartIcon"
-            android:src="@drawable/ic_cart"
-            android:focusable="true" />
+            android:src="@drawable/ic_cart" />
         <ImageView
-            android:id="@+id/homeIconLoginAct"
+            android:id="@+id/homeIconMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
             android:layout_marginTop="7dp"
-            android:clickable="true"
-            android:onClick="homeIcon"
             android:src="@drawable/ic_home"
-            android:focusable="true" />
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="homeIcon"
+            app:tint="@color/GoldenColor" />
 
         <TextView
-            android:id="@+id/homeTextLoginAct"
+            android:id="@+id/homeTextMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50.5dp"
             android:layout_marginTop="30dp"
-            android:textColor="@color/black"
+            android:textColor="@color/GoldenColor"
             android:text="Home" />
 
         <TextView
-            android:id="@+id/cartTextLoginAct"
+            android:id="@+id/cartTextMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="193dp"
@@ -183,13 +191,13 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/profileTextLoginAct"
+            android:id="@+id/profileTextMainAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="325dp"
             android:layout_marginTop="30dp"
             android:text="Profile"
-            android:textColor="@color/GoldenColor" />
+            android:textColor="@color/black" />
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -1,0 +1,82 @@
+<!-- cart_item_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Bicycle Image -->
+    <ImageView
+        android:id="@+id/imageCartItem"
+        android:layout_width="140dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bicycle_1" />
+
+    <!-- Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Brand -->
+        <TextView
+            android:id="@+id/textBrandCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brand"
+            android:textStyle="bold" />
+
+        <!-- Model -->
+        <TextView
+            android:id="@+id/textModelCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model" />
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/textPriceCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price" />
+
+        <!-- Quantity -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageDecreaseQuantity"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:src="@drawable/ic_remove"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/textQuantityCartItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1" />
+
+            <ImageView
+                android:id="@+id/imageIncreaseQuantity"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_add" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Delete Button -->
+    <ImageView
+        android:id="@+id/imageDeleteCartItem"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_delete" />
+
+</LinearLayout>

@@ -4,49 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/OffWhite"
-    tools:context=".MainActivity">
-
-
-    <Button
-        android:id="@+id/signOutButtonMainAct"
-        android:layout_width="95dp"
-        android:layout_height="41dp"
-        android:background="@drawable/custom_btn"
-        android:text="Sign Out"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-
-
-    <TextView
-        android:id="@+id/welcomeTextMainAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMainAct"
-        android:layout_width="match_parent"
-        android:layout_height="557dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.676" />
+    tools:context=".LoginOrSignUp">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -63,18 +21,19 @@
         tools:ignore="MissingConstraints" >
 
         <ImageView
-            android:id="@+id/profileIconMainAct"
+            android:id="@+id/profileIconLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="331dp"
             android:layout_marginTop="7dp"
+            android:src="@drawable/ic_profile"
             android:clickable="true"
             android:onClick="profileIcon"
-            android:src="@drawable/ic_profile"
+            app:tint="@color/GoldenColor"
             android:focusable="true" />
 
         <ImageView
-            android:id="@+id/cartIconMainAct"
+            android:id="@+id/cartIconLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="194dp"
@@ -84,26 +43,27 @@
             android:src="@drawable/ic_cart"
             android:focusable="true" />
         <ImageView
-            android:id="@+id/homeIconMainAct"
+            android:id="@+id/homeIconLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="56dp"
             android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:onClick="homeIcon"
             android:src="@drawable/ic_home"
-            android:focusable="true"
-            app:tint="@color/GoldenColor" />
+            android:focusable="true" />
 
         <TextView
-            android:id="@+id/homeTextMainAct"
+            android:id="@+id/homeTextLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50.5dp"
             android:layout_marginTop="30dp"
-            android:textColor="@color/GoldenColor"
+            android:textColor="@color/black"
             android:text="Home" />
 
         <TextView
-            android:id="@+id/cartTextMainAct"
+            android:id="@+id/cartTextLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="193dp"
@@ -112,26 +72,40 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/profileTextMainAct"
+            android:id="@+id/profileTextLoginOrSignUpAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="325dp"
             android:layout_marginTop="30dp"
             android:text="Profile"
-            android:textColor="@color/black" />
+            android:textColor="@color/GoldenColor" />
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="125dp"
-        android:layout_height="120dp"
+    <Button
+        android:id="@+id/LoginBtnLoginOrSignUpAct"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_btn"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintVertical_bias="0.441" />
 
+    <Button
+        android:id="@+id/SignUpBtnLoginOrSignUpAct"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_btn"
+        android:text="Sign Up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.441" />
 </androidx.constraintlayout.widget.ConstraintLayout>

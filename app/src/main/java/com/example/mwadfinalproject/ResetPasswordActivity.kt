@@ -1,9 +1,11 @@
 package com.example.mwadfinalproject
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -43,5 +45,17 @@ class ResetPasswordActivity : AppCompatActivity() {
                     }
             }
         }
+    }
+        fun homeIcon(view: View) {
+            val intent = Intent(this@ResetPasswordActivity, MainActivity::class.java)
+            startActivity(intent)
+    }
+    fun profileIcon(view: View) {
+        val intent = Intent(this@ResetPasswordActivity, Profile::class.java)
+        startActivity(intent)
+    }
+    fun cartIcon(view: View){
+        val intent = Intent(this@ResetPasswordActivity, Cart::class.java)
+        startActivity(intent)
     }
 }

@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/ConfoirmPasswordSignUpAct"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
         android:hint="Confirm Password"
@@ -17,79 +17,69 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
-
-    <Button
-        android:id="@+id/LoginBtnSignUpAct"
-        android:layout_width="95dp"
-        android:layout_height="41dp"
-        android:background="@drawable/custom_btn"
-        android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
-        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordSignUpAct"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct"
+        app:layout_constraintVertical_bias="0.002" />
 
     <EditText
         android:id="@+id/usernameSignUpAct"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
         android:hint="UserName"
         android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/AgeSignUpAct"
-        android:layout_width="324dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:selectAllOnFocus="true"
+        android:layout_marginTop="136dp"
         android:hint="Date Of Birth"
+        android:selectAllOnFocus="true"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
 
     <EditText
         android:id="@+id/EmailSignUpAct"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/passwordSignUpAct"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="44dp"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailSignUpAct"
+        app:layout_constraintVertical_bias="0.007" />
 
     <Button
         android:id="@+id/SignUpBtnSignUpAct"
@@ -99,13 +89,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/custom_btn"
-        android:text="sign in"
+        android:text="sign up "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordSignUpAct"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.449" />
 
     <ProgressBar
         android:id="@+id/loadingSignUpAct"
@@ -129,10 +119,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="0.482" />
 
     <RadioGroup
         android:id="@+id/radioGroupSignUpAct"
@@ -142,9 +132,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.49"
         tools:ignore="MissingConstraints">
 
 
@@ -171,25 +162,126 @@
         android:id="@+id/ShowCalBtnSignUpAct"
         android:layout_width="86dp"
         android:layout_height="45dp"
-        android:text="Button"
         android:background="@drawable/custom_btn"
+        android:text="calendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintVertical_bias="0.406" />
 
-    <TextView
-        android:id="@+id/ErrorTextSignUpAct"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
+        android:clickable="true"
+        android:onClick="AlreadyHaveAnAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707" />
+        app:layout_constraintVertical_bias="0.65">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Already have an account? Login"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="194dp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ValidationTextSignUpAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#C83939"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/OffWhiteTwo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997"
+        tools:ignore="MissingConstraints" >
+
+        <ImageView
+            android:id="@+id/profileIconSignUpAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="331dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_profile"
+            android:clickable="true"
+            android:onClick="profileIcon"
+            app:tint="@color/GoldenColor"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/cartIconSignUpAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="194dp"
+            android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:onClick="cartIcon"
+            android:src="@drawable/ic_cart"
+            android:focusable="true" />
+        <ImageView
+            android:id="@+id/homeIconSignUpAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:onClick="homeIcon"
+            android:src="@drawable/ic_home"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/homeTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50.5dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="Home" />
+
+        <TextView
+            android:id="@+id/cartTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="193dp"
+            android:layout_marginTop="30dp"
+            android:text="Cart"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/profileTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="325dp"
+            android:layout_marginTop="30dp"
+            android:text="Profile"
+            android:textColor="@color/GoldenColor" />
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

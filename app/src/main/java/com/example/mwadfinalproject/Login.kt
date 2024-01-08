@@ -2,12 +2,16 @@ package com.example.mwadfinalproject
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
@@ -31,30 +35,22 @@ class Login : AppCompatActivity() {
         // Initialize Firebase instances
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance() // Initialize FirebaseDatabase instance
-        val LoginBtn = findViewById<Button>(R.id.LoginUpBtnLoginAct)
+        val LoginBtn = findViewById<Button>(R.id.LoginBtnLoginAct)
         val loginFiled = findViewById<EditText>(R.id.EmailLoginAct)
         val passwordFiled = findViewById<EditText>(R.id.passwordLoginAct)
-        val signUpBtn = findViewById<Button>(R.id.signUpBtnLoginAct)
-        val forgotPassBtn = findViewById<Button>(R.id.ForgotPassBtnLoginAct)
+        val errorText = findViewById<TextView>(R.id.ErrorTextLogin)
         LoginBtn.setOnClickListener{
-                if ((loginFiled.text.toString() == "admin") && (passwordFiled.text.toString() == "admin")) {
-                    val user = auth.currentUser
-                    val Intent = Intent(this, adminLogin::class.java)
-                    startActivity(Intent)
-                } else {
+            if ((loginFiled.text.toString() == "admin") && (passwordFiled.text.toString() == "admin")) {
+                val user = auth.currentUser
+                val Intent = Intent(this, adminLogin::class.java)
+                startActivity(Intent)
+            } else {
+                if (isEmailValid(loginFiled.text.toString().trim()))
                     loginUser(loginFiled.text.toString().trim(), passwordFiled.text.toString())
+                else
+                    errorText.text = "Please enter a valid email"
             }
         }
-        signUpBtn.setOnClickListener {
-            val Intent = Intent(this, SignUp::class.java)
-            startActivity(Intent)
-        }
-        forgotPassBtn.setOnClickListener {
-            val Intent = Intent(this, ResetPasswordActivity::class.java)
-            startActivity(Intent)
-        }
-
-
     }
 
     private fun loginUser(email: String, password: String) {
@@ -89,35 +85,33 @@ class Login : AppCompatActivity() {
             }
     }
 
+    fun ForgotPassBtn(view: View){
+        val Intent = Intent(this@Login, ResetPasswordActivity::class.java)
+        startActivity(Intent)
+    }
 
+    fun NotRegisteredBtn(view: View){
+        val Intent = Intent(this@Login, SignUp::class.java)
+        startActivity(Intent)
+    }
 
-
-
-//    private fun loginUser(email: String, password: String) {
-//        auth.signInWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(this) { task ->
-//                if (task.isSuccessful) {
-//                    // User login successful
-//                    val user = auth.currentUser
-//                    // Proceed to the next screen or perform required action
-//                    Log.d("LoginActivity", "User logged in: ${user?.uid}")
-//                } else {
-//                    // Handle login failure
-//                    Log.e("LoginActivity", "Login failed: ${task.exception}")
-//                }
-//            }
-//    }
-
-    // A placeholder username validation check
-//    private fun isUserNameValid(username: String): Boolean {
-//        return if (username.contains('@')) {
-//            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-//        } else {
-//            username.isNotBlank()
-//        }
-//    }
-    // A placeholder password validation check
-//    private fun isPasswordValid(password: String): Boolean {
-//        return password.length > 5
-//    }
+    fun isEmailValid(Email: String): Boolean {
+        return if (Email.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(Email).matches()
+        } else {
+            Email.isNotBlank()
+        }
+    }
+        fun homeIcon(view: View) {
+            val intent = Intent(this@Login, MainActivity::class.java)
+            startActivity(intent)
+    }
+    fun profileIcon(view: View) {
+        val intent = Intent(this@Login, Profile::class.java)
+        startActivity(intent)
+    }
+    fun cartIcon(view: View){
+        val intent = Intent(this@Login, Cart::class.java)
+        startActivity(intent)
+    }
 }
