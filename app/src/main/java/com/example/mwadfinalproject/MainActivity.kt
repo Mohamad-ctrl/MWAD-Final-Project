@@ -4,26 +4,29 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.example.mwadfinalproject.Bicycle
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
 
 
@@ -36,31 +39,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
         auth = FirebaseAuth.getInstance()
         val welcomeText = findViewById<TextView>(R.id.welcomeTextMainAct)
-        val signOutButton: Button = findViewById(R.id.signOutButtonMainAct)
-        readDataFromDatabase()
+        val brandEditText = findViewById<EditText>(R.id.brandEditText)
+        brandEditText.setOnClickListener {
+            val brandEditText: EditText = findViewById(R.id.brandEditText)
+            val brandName = brandEditText.text.toString()
+            readDataFromDatabase(brandName)
+        }
+        readDataFromDatabase("")
+
         authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             if (user == null) {
                 // User is signed out, update UI accordingly
-                signOutButton.visibility = View.GONE
                 welcomeText.visibility = View.GONE
             } else {
                 // User is signed in, update UI with the signed-in user's information
                 user.reload().addOnCompleteListener {
                     val updatedUser = FirebaseAuth.getInstance().currentUser
                     val userName = user.displayName
-                    welcomeText.text = "Welcome, \n${userName ?: "User"}"
-                    signOutButton.visibility = View.VISIBLE
+                    welcomeText.text = "Welcome, ${userName ?: "User"}"
                 }
             }
         }
 
-        signOutButton.setOnClickListener {
-            // Sign the user out
-            auth.signOut()
-        }
+
     }
 
     override fun onStart() {
@@ -73,8 +79,9 @@ class MainActivity : AppCompatActivity() {
         auth.removeAuthStateListener(authListener)
     }
 
-//    fun homeIcon(view: View) {
-//        val intent = Intent(this@MainActivity, MainActivity::class.java)
+//        fun homeIcon(view: View) {
+//            val intent = Intent(this@MainActivity, MainActivity::class.java)
+//            startActivity(intent)
 //    }
     fun profileIcon(view: View) {
         val intent = Intent(this@MainActivity, Profile::class.java)
@@ -84,43 +91,40 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, Cart::class.java)
         startActivity(intent)
     }
-    private fun readDataFromDatabase() {
+    private fun readDataFromDatabase(brandName: String) {
         myRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val bicycles = mutableListOf<Bicycle>() // Create a list to hold bicycle items
+                val bicycles = mutableListOf<Bicycle>()
 
                 for (snapshot in dataSnapshot.children) {
                     val brand = snapshot.child("brand").getValue(String::class.java)
-                    val model = snapshot.child("model").getValue(String::class.java)
-                    val price = snapshot.child("price").getValue(Int::class.java)
-                    val description = snapshot.child("description").getValue(String::class.java)
-                    val imageURL = snapshot.child("imageURL").getValue(String::class.java)
 
-                    // Get the unique ID of the bicycle from Firebase
-                    val bicycleId = snapshot.key // Fetch the unique ID from Firebase
+                    if (brandName.isEmpty() || brand.equals(brandName, ignoreCase = true)) {
+                        val model = snapshot.child("model").getValue(String::class.java)
+                        val price = snapshot.child("price").getValue(Int::class.java)
+                        val description = snapshot.child("description").getValue(String::class.java)
+                        val imageURL = snapshot.child("imageURL").getValue(String::class.java)
+                        val bicycleId = snapshot.key
 
-                    // Create Bicycle object with the fetched ID and add to the list
-                    if (brand != null && model != null && price != null && description != null && imageURL != null && bicycleId != null) {
-                        bicycles.add(Bicycle(bicycleId, brand, model, description, price, imageURL, false, 1))
+                        if (model != null && price != null && description != null && imageURL != null && bicycleId != null) {
+                            bicycles.add(Bicycle(bicycleId, brand.toString(), model, description, price, imageURL, false, 1))
+                        }
                     }
                 }
 
-                // Set up your RecyclerView adapter here using the 'bicycles' list
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewMainAct)
-                recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2) // Set 2 columns
+                recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
                 val adapter = BicycleAdapter(bicycles)
                 recyclerView.adapter = adapter
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.e(
-                    "adminLogin",
-                    "Error reading data from database",
-                    databaseError.toException()
-                )
+                Log.e("adminLogin", "Error reading data from database", databaseError.toException())
             }
         })
     }
+
+
     private fun addToCart(item: Bicycle) {
         val cartItems = getCartItems().toMutableSet()
         val existingItem = cartItems.find { it.id == item.id }

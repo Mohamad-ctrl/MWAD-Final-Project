@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -98,13 +99,22 @@ class Cart : AppCompatActivity() {
             }
 
             holder.decreaseButton.setOnClickListener {
-                if (cartItemList[position].quantity > 0) {
-                    val updatedItem = cartItemList[position].copy(quantity = cartItemList[position].quantity - 1)
-                    cartItemList[position] = updatedItem
-                    saveCartItemsToSharedPreferences(cartItemList) // Save the updated list
-                    updateCartItems(cartItemList) // Notify the adapter about the dataset change
-                    updateTotalPrice()
-                    Toast.makeText(this@Cart, "Item's quantity has been decreased", Toast.LENGTH_SHORT).show()
+                if(cartItemList[position].quantity == 1) {
+                    Toast.makeText(this@Cart, "minimum quantity is 1", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (cartItemList[position].quantity > 0) {
+                        val updatedItem =
+                            cartItemList[position].copy(quantity = cartItemList[position].quantity - 1)
+                        cartItemList[position] = updatedItem
+                        saveCartItemsToSharedPreferences(cartItemList) // Save the updated list
+                        updateCartItems(cartItemList) // Notify the adapter about the dataset change
+                        updateTotalPrice()
+                        Toast.makeText(
+                            this@Cart,
+                            "Item's quantity has been decreased",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
 
@@ -149,6 +159,8 @@ class Cart : AppCompatActivity() {
         cartRecyclerView.adapter = cartAdapter
         cartItems = getCartItems().toMutableList() // Initialize cartItems
         updateTotalPrice()
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
         val checkOutButton = findViewById<Button>(R.id.checkOutButton)
 
         checkOutButton.setOnClickListener {
@@ -156,14 +168,21 @@ class Cart : AppCompatActivity() {
             authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
                 val user = firebaseAuth.currentUser
                 if (user == null) {
-                    intent = Intent(this@Cart, LoginOrSignUp::class.java)
+                    // User is not logged in, navigate to the Login or Sign Up activity
+                    val intent = Intent(this@Cart, LoginOrSignUp::class.java)
                     startActivity(intent)
                 } else {
-                    intent = Intent(this@Cart, LoginOrSignUp::class.java)
+                    // User is logged in, navigate to the Checkout activity
+                    val intent = Intent(this@Cart, CheckOut::class.java)
+                    intent.putExtra("TotalPrice", calculateTotalPrice())
+                    intent.putExtra("CartItems", ArrayList(getCartItems()))
                     startActivity(intent)
                 }
             }
+            // Add the AuthStateListener to check the user's authentication status
+            auth.addAuthStateListener(authListener)
         }
+
     }
     private fun calculateTotalPrice(): Int {
         var totalPrice = 0

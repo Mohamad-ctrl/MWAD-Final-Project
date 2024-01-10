@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,6 +36,8 @@ class adminLogin : AppCompatActivity() {
         val descriptionField = findViewById<EditText>(R.id.description)
         val ItemImage = findViewById<ImageView>(R.id.ItemImage)
         val curDataBtn = findViewById<Button>(R.id.ViewCurrentDataAdminLoginAct)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
 
         curDataBtn.setOnClickListener {
             val intent = Intent(this, DisplayData::class.java)

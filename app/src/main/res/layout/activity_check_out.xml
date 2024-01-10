@@ -6,4 +6,82 @@
     android:layout_height="match_parent"
     tools:context=".CheckOut">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/OffWhiteTwo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997"
+        tools:ignore="MissingConstraints" >
+
+        <ImageView
+            android:id="@+id/profileIconMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="331dp"
+            android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:onClick="profileIcon"
+            android:src="@drawable/ic_profile"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/cartIconMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="194dp"
+            android:layout_marginTop="7dp"
+            android:clickable="true"
+            android:onClick="cartIcon"
+            android:src="@drawable/ic_cart"
+            app:tint="@color/GoldenColor"
+            android:focusable="true" />
+        <ImageView
+            android:id="@+id/homeIconMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_home"
+            android:onClick="homeIcon"
+            android:focusable="true"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/homeTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50.5dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:text="Home" />
+
+        <TextView
+            android:id="@+id/cartTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="193dp"
+            android:layout_marginTop="30dp"
+            android:text="Cart"
+            android:textColor="@color/GoldenColor" />
+
+        <TextView
+            android:id="@+id/profileTextMainAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="325dp"
+            android:layout_marginTop="30dp"
+            android:text="Profile"
+            android:textColor="@color/black" />
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

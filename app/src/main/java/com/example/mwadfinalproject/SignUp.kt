@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -44,8 +45,10 @@ class SignUp : AppCompatActivity() {
 
         // Call the function to register a new user
         val signupButton = findViewById<Button>(R.id.SignUpBtnSignUpAct)
-        val birthDateButton = findViewById<Button>(R.id.ShowCalBtnSignUpAct)
+        val birthDateButton = findViewById<ImageView>(R.id.ShowCalBtnSignUpAct)
         val calendar = Calendar.getInstance()
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             // Set the selected date to the EditText field or use it as needed
@@ -80,6 +83,7 @@ class SignUp : AppCompatActivity() {
                 R.id.FemaleRadioSignUpAct -> "Female"
                 else -> "Null" // Handle if no gender is selected
             }
+            // Validating user's input
             if (isEmailValid(email))
                 if (isPasswordMatched(password, password2))
                     if (isPasswordValid(password))
@@ -138,7 +142,7 @@ class SignUp : AppCompatActivity() {
                                 Toast.makeText(this@SignUp, "Sign is completed !", Toast.LENGTH_SHORT).show()
                                 // Save additional user data to the database
                                 user?.uid?.let { userId ->
-                                    saveUserDataToDatabase(userId, userName, birthDate, selectedGender)
+                                    saveUserDataToDatabase(userId, userName, birthDate, selectedGender, email)
                                 }
                             } else {
                                 // Handle user registration failure
@@ -155,10 +159,11 @@ class SignUp : AppCompatActivity() {
         })
     }
 
-    private fun saveUserDataToDatabase(userId: String, userName: String, birthDate: String, gender: String) {
+    private fun saveUserDataToDatabase(userId: String, userName: String, birthDate: String, gender: String, email: String) {
         val userData = HashMap<String, Any>()
         userData["username"] = userName
         userData["birthDate"] = birthDate
+        userData["email"] = email
         userData["gender"] = gender // Save gender
 
         usersRef.child(userId).setValue(userData)

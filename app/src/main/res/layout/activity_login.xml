@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EmailLoginAct" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -42,12 +43,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998">
+        app:layout_constraintVertical_bias="0.29000002">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forogot Password "
+            android:text="Forgot Password ?"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="149dp"
             tools:layout_editor_absoluteY="194dp" />
@@ -110,13 +111,14 @@
         android:id="@+id/ErrorTextLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#424242"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintVertical_bias="0.336"
+         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -193,6 +195,18 @@
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/ValidationTextLoginAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#C83939"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

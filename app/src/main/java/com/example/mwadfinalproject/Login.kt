@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
@@ -27,7 +28,7 @@ class Login : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -38,7 +39,9 @@ class Login : AppCompatActivity() {
         val LoginBtn = findViewById<Button>(R.id.LoginBtnLoginAct)
         val loginFiled = findViewById<EditText>(R.id.EmailLoginAct)
         val passwordFiled = findViewById<EditText>(R.id.passwordLoginAct)
-        val errorText = findViewById<TextView>(R.id.ErrorTextLogin)
+        val ValadationText = findViewById<TextView>(R.id.ValidationTextLoginAct)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
         LoginBtn.setOnClickListener{
             if ((loginFiled.text.toString() == "admin") && (passwordFiled.text.toString() == "admin")) {
                 val user = auth.currentUser
@@ -48,11 +51,12 @@ class Login : AppCompatActivity() {
                 if (isEmailValid(loginFiled.text.toString().trim()))
                     loginUser(loginFiled.text.toString().trim(), passwordFiled.text.toString())
                 else
-                    errorText.text = "Please enter a valid email"
+                    ValadationText.text = "Please enter a valid email"
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loginUser(email: String, password: String) {
         val errorText = findViewById<TextView>(R.id.ErrorTextLogin)
 

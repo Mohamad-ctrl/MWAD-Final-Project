@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import com.bumptech.glide.Glide
 
 class ShowBicycle : AppCompatActivity() {
@@ -22,6 +23,8 @@ class ShowBicycle : AppCompatActivity() {
         val price = intent.getIntExtra("price", 0)
         val StringPrice = price.toString()
         val imageUri = Uri.parse(image)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
 
         val bikeBrand = findViewById<TextView>(R.id.BrandTextShowBikeAct).apply {
             text = brand

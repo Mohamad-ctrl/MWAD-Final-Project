@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.ActionBar
 
 class LoginOrSignUp : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -16,6 +17,8 @@ class LoginOrSignUp : AppCompatActivity() {
         setContentView(R.layout.activity_login_or_sign_up)
         val LoginBtn = findViewById<Button>(R.id.LoginBtnLoginOrSignUpAct)
         val SignUpBtn = findViewById<Button>(R.id.SignUpBtnLoginOrSignUpAct)
+        val actionBar: ActionBar? = supportActionBar
+        actionBar?.hide();
 
         LoginBtn.setOnClickListener {
             val intent = Intent(this, Login::class.java)
