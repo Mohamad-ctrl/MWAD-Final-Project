@@ -75,7 +75,7 @@ class Cart : AppCompatActivity() {
         override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
 
             val currentItem = cartItemList[position]
-            val imageUri = Uri.parse(currentItem.imageResId)
+            val imageUri = Uri.parse(currentItem.ImageURL)
             val PriceToString = currentItem.price.toString()
 
             // Set the data to your views in the ViewHolder
@@ -162,25 +162,28 @@ class Cart : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide();
         val checkOutButton = findViewById<Button>(R.id.checkOutButton)
-
         checkOutButton.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
-            authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-                val user = firebaseAuth.currentUser
-                if (user == null) {
-                    // User is not logged in, navigate to the Login or Sign Up activity
-                    val intent = Intent(this@Cart, LoginOrSignUp::class.java)
-                    startActivity(intent)
-                } else {
-                    // User is logged in, navigate to the Checkout activity
-                    val intent = Intent(this@Cart, CheckOut::class.java)
-                    intent.putExtra("TotalPrice", calculateTotalPrice())
-                    intent.putExtra("CartItems", ArrayList(getCartItems()))
-                    startActivity(intent)
+            if (cartItems.isEmpty()) {
+                Toast.makeText(this, "Pleases add items before checking out.", Toast.LENGTH_SHORT).show()
+            } else {
+                auth = FirebaseAuth.getInstance()
+                authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+                    val user = firebaseAuth.currentUser
+                    if (user == null) {
+                        // User is not logged in, navigate to the Login or Sign Up activity
+                        val intent = Intent(this@Cart, LoginOrSignUp::class.java)
+                        startActivity(intent)
+                    } else {
+                        // User is logged in, navigate to the Checkout activity
+                        val intent = Intent(this@Cart, CheckOut::class.java)
+                        intent.putExtra("TotalPrice", calculateTotalPrice())
+                        intent.putExtra("CartItems", ArrayList(getCartItems()))
+                        startActivity(intent)
+                    }
                 }
+                // Add the AuthStateListener to check the user's authentication status
+                auth.addAuthStateListener(authListener)
             }
-            // Add the AuthStateListener to check the user's authentication status
-            auth.addAuthStateListener(authListener)
         }
 
     }
@@ -191,7 +194,6 @@ class Cart : AppCompatActivity() {
         for (item in cartItems) {
             totalPrice += item.price * item.quantity
         }
-        Log.e("Cart", "calculate Total Price is called")
         return totalPrice
     }
 

@@ -18,7 +18,11 @@ class Profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         val SignOutBtn = findViewById<LinearLayout>(R.id.SignOutProfileAct)
         val ManageAccBtn = findViewById<LinearLayout>(R.id.ManageAccountProfileAct)
+        val OrdersBtn = findViewById<LinearLayout>(R.id.OrdersProfileAct)
 
+        OrdersBtn.setOnClickListener{
+            startActivity(Intent(this, Orders::class.java))
+        }
         ManageAccBtn.setOnClickListener{
             startActivity(Intent(this, ManageAccount::class.java))
         }

@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         val welcomeText = findViewById<TextView>(R.id.welcomeTextMainAct)
         val brandEditText = findViewById<EditText>(R.id.brandEditText)
         brandEditText.setOnClickListener {
-            val brandEditText: EditText = findViewById(R.id.brandEditText)
             val brandName = brandEditText.text.toString()
             readDataFromDatabase(brandName)
         }
@@ -119,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.e("adminLogin", "Error reading data from database", databaseError.toException())
+                Log.e("MainActivity", "Error reading data from database", databaseError.toException())
             }
         })
     }
@@ -160,20 +159,24 @@ class MainActivity : AppCompatActivity() {
             return BicycleViewHolder(itemView)
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: BicycleViewHolder, position: Int) {
             val currentItem = bicycleList[position]
-            val imageUri = Uri.parse(currentItem.imageResId)
+            val imageUri = Uri.parse(currentItem.ImageURL)
 
             holder.brandTextView.text = currentItem.brand
-            holder.priceTextView.text = currentItem.price.toString()
+            holder.priceTextView.text = "${currentItem.price}$"
 
+            Log.e("MainActivity", "Image URL after parsing ($imageUri) || Image Url before parsing ${currentItem.ImageURL}")
+            // Load the image using Glide
             Glide.with(holder.itemView.context)
                 .load(imageUri)
+                .timeout(60000) // Set a longer timeout (in milliseconds)
                 .into(holder.bikeImage)
 
             holder.readMoreButton.setOnClickListener {
                 val description = currentItem.description
-                val image = currentItem.imageResId
+                val image = currentItem.ImageURL
                 val model = currentItem.model
                 val brand = currentItem.brand
                 val price = currentItem.price

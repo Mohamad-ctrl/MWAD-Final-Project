@@ -12,6 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,6 +38,7 @@ class adminLogin : AppCompatActivity() {
         val descriptionField = findViewById<EditText>(R.id.description)
         val ItemImage = findViewById<ImageView>(R.id.ItemImage)
         val curDataBtn = findViewById<Button>(R.id.ViewCurrentDataAdminLoginAct)
+        val validationError = findViewById<TextView>(R.id.ValidationTextAdminLoginAct)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide();
 
@@ -54,7 +57,6 @@ class adminLogin : AppCompatActivity() {
         InsertBtn.setOnClickListener {
             val pricestr = Price.text.toString()
             val priceInt: Int = pricestr.toIntOrNull() ?: 0
-
             val description = descriptionField.text.toString()
             val brand = Brand.text.toString()
             val model = Model.text.toString()
@@ -62,9 +64,12 @@ class adminLogin : AppCompatActivity() {
             // Validation: Check if the image is selected
             val imageUri = ItemImage.tag as? Uri
             if (imageUri != null) {
-                // Call the function to write data to the database
-                uploadImageToFirebaseStorage(imageUri, brand, model, priceInt, description)
-            }
+                if (isValidPrice(pricestr)) {
+                    uploadImageToFirebaseStorage(imageUri, brand, model, priceInt, description)
+                } else
+                    validationError.text = "Please enter a valid price"
+            } else
+                validationError.text = "Please select a photo for the bicycle"
         }
     }
 
@@ -122,8 +127,9 @@ class adminLogin : AppCompatActivity() {
         bicycleId?.let {
             myRef.child(it).setValue(bicycle)
                 .addOnSuccessListener {
+                    Toast.makeText(this@adminLogin, "Item has been inserted to the database", Toast.LENGTH_SHORT).show()
                     Log.d("adminLogin", "Bicycle data saved to database")
-                    readDataFromDatabase()
+//                    readDataFromDatabase()
                 }
                 .addOnFailureListener {
                     Log.e("adminLogin", "Error writing bicycle data to database", it)
@@ -131,34 +137,34 @@ class adminLogin : AppCompatActivity() {
         }
     }
 
-    private fun readDataFromDatabase() {
-        // Read data from the database
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (snapshot in dataSnapshot.children) {
-                    // Retrieve bicycle data
-                    val brand = snapshot.child("brand").getValue(String::class.java)
-                    val model = snapshot.child("model").getValue(String::class.java)
-                    val price = snapshot.child("price").getValue(Double::class.java)
-                    val description = snapshot.child("description").getValue(String::class.java)
-
-                    // Log retrieved data
-                    Log.d(
-                        "adminLogin",
-                        "Brand: $brand, Model: $model, Price: $price, Description: $description"
-                    )
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.e(
-                    "adminLogin",
-                    "Error reading data from database",
-                    databaseError.toException()
-                )
-            }
-        })
-    }
+//    private fun readDataFromDatabase() {
+//        // Read data from the database
+//        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (snapshot in dataSnapshot.children) {
+//                    // Retrieve bicycle data
+//                    val brand = snapshot.child("brand").getValue(String::class.java)
+//                    val model = snapshot.child("model").getValue(String::class.java)
+//                    val price = snapshot.child("price").getValue(Double::class.java)
+//                    val description = snapshot.child("description").getValue(String::class.java)
+//
+//                    // Log retrieved data
+//                    Log.d(
+//                        "adminLogin",
+//                        "Brand: $brand, Model: $model, Price: $price, Description: $description"
+//                    )
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                Log.e(
+//                    "adminLogin",
+//                    "Error reading data from database",
+//                    databaseError.toException()
+//                )
+//            }
+//        })
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -169,5 +175,39 @@ class adminLogin : AppCompatActivity() {
             findViewById<ImageView>(R.id.ItemImage).setImageURI(imageUri)
             ItemImage.tag = imageUri // Store the image URI in the tag for future use
         }
+    }
+    fun isValidPrice(priceInput: String): Boolean {
+        // Check if the input is not empty
+        if (priceInput.isEmpty()) {
+            return false
+        }
+
+        // Try parsing the input as a double
+        try {
+            val price = priceInput.toInt()
+
+            // Check if the price is a positive number
+            if (price >= 0) {
+                return true
+            }
+        } catch (e: NumberFormatException) {
+            // Handle the case where the input is not a valid number
+            return false
+        }
+
+        return false
+    }
+
+    fun homeIcon(view: View) {
+        val intent = Intent(this@adminLogin, MainActivity::class.java)
+        startActivity(intent)
+    }
+    fun profileIcon(view: View) {
+        val intent = Intent(this@adminLogin, Profile::class.java)
+        startActivity(intent)
+    }
+    fun cartIcon(view: View){
+        val intent = Intent(this@adminLogin, Cart::class.java)
+        startActivity(intent)
     }
 }

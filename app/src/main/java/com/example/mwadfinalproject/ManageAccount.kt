@@ -33,7 +33,7 @@ class ManageAccount : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         usersRef = FirebaseDatabase.getInstance().getReference("users").child(auth.currentUser?.uid ?: "")
 
-        val editTextUsername = findViewById<EditText>(R.id.editTextUsername)
+        val editTextUsername = findViewById<TextView>(R.id.UserNameTextManageAccAct)
         val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
         val editTextBirthDate = findViewById<EditText>(R.id.editTextBirthDate)
         val radioGroupGender = findViewById<RadioGroup>(R.id.radioGroupGender)
@@ -67,7 +67,7 @@ class ManageAccount : AppCompatActivity() {
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
-                editTextUsername.setText(user?.username)
+                editTextUsername.text = "Username: ${user?.username}"
                 editTextEmail.setText(user?.email)
                 editTextBirthDate.setText(user?.birthDate)
                 // Set the gender based on fetched data

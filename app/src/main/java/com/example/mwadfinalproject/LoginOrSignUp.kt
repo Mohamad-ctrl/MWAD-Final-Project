@@ -31,9 +31,9 @@ class LoginOrSignUp : AppCompatActivity() {
     }
 
 
-        fun homeIcon(view: View) {
-            val intent = Intent(this@LoginOrSignUp, MainActivity::class.java)
-            startActivity(intent)
+    fun homeIcon(view: View) {
+        val intent = Intent(this@LoginOrSignUp, MainActivity::class.java)
+        startActivity(intent)
     }
     fun profileIcon(view: View) {
         val intent = Intent(this@LoginOrSignUp, Profile::class.java)

@@ -1,0 +1,47 @@
+<!-- cart_item_layout.xml -->
+<LinearLayout
+    android:id="@+id/ShowOrderBtn"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="8dp"
+    android:layout_margin="5dp">
+
+
+    <!-- Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Brand -->
+        <TextView
+            android:id="@+id/textBrandCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordered on 2024-01-11 15:14:46"
+            android:textStyle="bold" />
+
+        <!-- Model -->
+        <TextView
+            android:id="@+id/textModelCartItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Status: Confiremed"
+            android:textColor="#424242" />
+
+
+    </LinearLayout>
+
+    <!-- Delete Button -->
+    <ImageView
+        android:id="@+id/imageDeleteCartItem"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_right_arrow" />
+
+</LinearLayout>

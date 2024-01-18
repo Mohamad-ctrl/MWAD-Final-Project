@@ -4,54 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayData">
+    tools:context=".Orders">
 
-    <Button
-        android:id="@+id/InsertNewItemsBtnDisplayDataAct"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_btn"
-        android:text="Insert new items"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008"
-        tools:ignore="HardcodedText" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/itemsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/brandEditTextDisplayDataAct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_search"
-                android:hint="Enter brand name"
-                android:inputType="text"
-                android:textSize="14sp" />
+            <!-- This container will dynamically hold the list of items and quantities -->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewDisplayDataAct"
-                android:layout_width="match_parent"
-                android:layout_height="670dp" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -127,6 +101,5 @@
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
