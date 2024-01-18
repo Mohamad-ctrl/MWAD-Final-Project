@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 
 class ShowBicycle : AppCompatActivity() {
+    private lateinit var currentItem: Bicycle
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,7 @@ class ShowBicycle : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val price = intent.getIntExtra("price", 0)
         val StringPrice = price.toString()
+        currentItem = intent.getParcelableExtra("Bicycle")!!
         val imageUri: Uri? = if (!image.isNullOrEmpty()) Uri.parse(image) else null
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide();
@@ -77,7 +79,7 @@ class ShowBicycle : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun addToCart(item: Bicycle) {
+    private fun AddToCart(item: Bicycle) {
         val cartItems = getCartItems().toMutableSet()
         val existingItem = cartItems.find { it.id == item.id }
 
@@ -86,8 +88,11 @@ class ShowBicycle : AppCompatActivity() {
         } else {
             cartItems.add(item.copy(addedToCart = true, quantity = 1))
         }
-
         saveCartItems(cartItems)
         Toast.makeText(this@ShowBicycle, "Item has been added to cart", Toast.LENGTH_SHORT).show()
+    }
+
+    fun addToCart(view: View) {
+        AddToCart(currentItem)
     }
 }

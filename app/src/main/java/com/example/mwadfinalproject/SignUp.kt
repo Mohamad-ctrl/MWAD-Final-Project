@@ -5,12 +5,14 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -32,8 +34,9 @@ class SignUp : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var usersRef: DatabaseReference
+    private lateinit var progressBar: ProgressBar
 
-    @SuppressLint("MissingInflatedId", "SetTextI18n")
+    @SuppressLint("MissingInflatedId", "SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -44,6 +47,7 @@ class SignUp : AppCompatActivity() {
         usersRef = database.getReference("users")
 
         // Call the function to register a new user
+        progressBar = findViewById(R.id.loadingSignUpAct)
         val signupButton = findViewById<Button>(R.id.SignUpBtnSignUpAct)
         val birthDateButton = findViewById<ImageView>(R.id.ShowCalBtnSignUpAct)
         val calendar = Calendar.getInstance()
@@ -77,11 +81,25 @@ class SignUp : AppCompatActivity() {
             val password2 = findViewById<EditText>(R.id.ConfoirmPasswordSignUpAct).text.toString()
             val genderGroup = findViewById<RadioGroup>(R.id.radioGroupSignUpAct)
             val ValidationError = findViewById<TextView>(R.id.ValidationTextSignUpAct)
+            val passwordFiled = findViewById<EditText>(R.id.passwordSignUpAct)
+            val showpass = findViewById<ImageView>(R.id.ShowPass)
+            val hidepass = findViewById<ImageView>(R.id.hidePass)
             val genderId = genderGroup.checkedRadioButtonId
             val selectedGender = when (genderId) {
                 R.id.MaleRadioSignUpAct -> "Male"
                 R.id.FemaleRadioSignUpAct -> "Female"
                 else -> "Null" // Handle if no gender is selected
+            }
+            showpass.setOnClickListener{
+                passwordFiled.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                showpass.visibility = View.GONE
+                hidepass.visibility = View.VISIBLE
+            }
+
+            hidepass.setOnClickListener{
+                passwordFiled.inputType = InputType.TYPE_CLASS_TEXT
+                hidepass.visibility = View.GONE
+                showpass.visibility = View.VISIBLE
             }
             // Validating user's input
             if (isEmailValid(email))
@@ -104,19 +122,21 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun registerNewUser(email: String, password: String, userName: String, birthDate: String, selectedGender: String) {
+        progressBar.visibility = View.VISIBLE
         val errorText = findViewById<TextView>(R.id.ValidationTextSignUpAct)
         // Check if the username already exists
-        usersRef.orderByChild("username").equalTo(userName).addListenerForSingleValueEvent(object : ValueEventListener {
+        usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // Username already exists, handle accordingly (show error, prompt for a new username, etc.)
-                    Log.d("SignUpActivity", "Username already exists")
-                    errorText.text = "Username already exists please choose a another one"
+                    Log.d("SignUpActivity", "email already exists")
+                    errorText.text = "email already exists"
                 } else {
                     // Username doesn't exist, proceed with user registration
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this@SignUp) { task ->
+                            progressBar.visibility = View.GONE
                             if (task.isSuccessful) {
                                 // User registration successful
                                 val user = auth.currentUser
@@ -154,7 +174,7 @@ class SignUp : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle error while checking for username existence
-                Log.e("SignUpActivity", "Error checking username existence: ${databaseError.message}")
+                Log.e("SignUpActivity", "Error checking email existence: ${databaseError.message}")
             }
         })
     }

@@ -187,6 +187,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("model", model)
                 intent.putExtra("brand", brand)
                 intent.putExtra("price", price)
+                intent.putExtra("Bicycle", currentItem)
 
                 holder.itemView.context.startActivity(intent)
             }

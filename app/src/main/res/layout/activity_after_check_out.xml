@@ -4,106 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    tools:context=".AfterCheckOut">
 
-    <LinearLayout
-        android:id="@+id/OrdersProfileAct"
-        android:layout_width="wrap_content"
+
+    <Button
+        android:id="@+id/continueShoppingBtn"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
+        android:background="@drawable/custom_btn"
+        android:text="continue shopping"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.229">
+        app:layout_constraintVertical_bias="0.569" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_orders" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:text="My Orders"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ManageAccountProfileAct"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/OrdersPage"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
+        android:background="@drawable/custom_btn"
+        android:text="Orders Page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_edit_profile" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:text="Mange account"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/SignOutProfileAct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.781">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_sign_out" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            android:text="Sign Out"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.569" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -128,7 +56,6 @@
             android:clickable="true"
             android:onClick="profileIcon"
             android:src="@drawable/ic_profile"
-            app:tint="@color/GoldenColor"
             android:focusable="true" />
 
         <ImageView
@@ -140,6 +67,7 @@
             android:clickable="true"
             android:onClick="cartIcon"
             android:src="@drawable/ic_cart"
+            app:tint="@color/GoldenColor"
             android:focusable="true" />
         <ImageView
             android:id="@+id/homeIconMainAct"
@@ -148,9 +76,8 @@
             android:layout_marginLeft="56dp"
             android:layout_marginTop="7dp"
             android:src="@drawable/ic_home"
-            android:focusable="true"
-            android:clickable="true"
             android:onClick="homeIcon"
+            android:focusable="true"
             app:tint="@color/black" />
 
         <TextView
@@ -169,7 +96,7 @@
             android:layout_marginLeft="193dp"
             android:layout_marginTop="30dp"
             android:text="Cart"
-            android:textColor="@color/black" />
+            android:textColor="@color/GoldenColor" />
 
         <TextView
             android:id="@+id/profileTextMainAct"
@@ -178,9 +105,22 @@
             android:layout_marginLeft="325dp"
             android:layout_marginTop="30dp"
             android:text="Profile"
-            android:textColor="@color/GoldenColor" />
+            android:textColor="@color/black" />
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank you for your purchase\nYour Order has been placed!"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,7 @@ class CheckOut : AppCompatActivity() {
                 if (isValidCreditCardExpiration(CardDate)) {
                     if (isValidCCV(CardCCV.toString())) {
                         placeOrder()
+                        startActivity(Intent(this, AfterCheckOut::class.java))
                     } else
                         ValidtionText.text = "please enter a valid CCV number"
                 } else
@@ -193,30 +194,7 @@ class CheckOut : AppCompatActivity() {
     }
 
     fun isValidCreditCardNumber(cardNumber: String): Boolean {
-        // Clean the input by removing non-digit characters
-        val cleanedCardNumber = cardNumber.replace("\\D".toRegex(), "")
-
-        // Check if the card number contains only digits and has a valid length
-        if (!cleanedCardNumber.matches(Regex("\\d+")) || cleanedCardNumber.length !in 13..19) {
-            return false
-        }
-
-        // Apply the Luhn algorithm to validate the card number
-        var sum = 0
-        var alternate = false
-        for (i in cleanedCardNumber.length - 1 downTo 0) {
-            var digit = cleanedCardNumber[i].toString().toInt()
-            if (alternate) {
-                digit *= 2
-                if (digit > 9) {
-                    digit -= 9
-                }
-            }
-            sum += digit
-            alternate = !alternate
-        }
-
-        return sum % 10 == 0
+        return cardNumber.length == 16
     }
     fun isValidCCV(ccv: String): Boolean {
         // Check if the CCV contains only digits and has a valid length

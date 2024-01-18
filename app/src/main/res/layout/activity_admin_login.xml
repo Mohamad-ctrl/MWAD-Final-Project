@@ -173,6 +173,8 @@
             android:layout_marginTop="7dp"
             android:src="@drawable/ic_home"
             android:focusable="true"
+            android:clickable="true"
+            android:onClick="homeIcon"
             app:tint="@color/black" />
 
         <TextView

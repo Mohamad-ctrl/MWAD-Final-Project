@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -16,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -25,6 +27,9 @@ import java.util.Locale
 class ManageAccount : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var usersRef: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var email: String
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +38,8 @@ class ManageAccount : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         usersRef = FirebaseDatabase.getInstance().getReference("users").child(auth.currentUser?.uid ?: "")
 
-        val editTextUsername = findViewById<TextView>(R.id.UserNameTextManageAccAct)
-        val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
+        val editTextUsername = findViewById<TextView>(R.id.EmailTextManageAccAct)
+        val editTextEmail = findViewById<EditText>(R.id.editTextUserName)
         val editTextBirthDate = findViewById<EditText>(R.id.editTextBirthDate)
         val radioGroupGender = findViewById<RadioGroup>(R.id.radioGroupGender)
         val radioButtonMale = findViewById<RadioButton>(R.id.radioButtonMale)
@@ -67,9 +72,10 @@ class ManageAccount : AppCompatActivity() {
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
-                editTextUsername.text = "Username: ${user?.username}"
-                editTextEmail.setText(user?.email)
+                editTextUsername.text = "Email: ${user?.email}"
+                editTextEmail.setText(user?.username)
                 editTextBirthDate.setText(user?.birthDate)
+                email = user?.email.toString()
                 // Set the gender based on fetched data
                 if (user?.gender == "Male") {
                     radioButtonMale.isChecked = true
@@ -84,7 +90,7 @@ class ManageAccount : AppCompatActivity() {
         })
 
         buttonUpdateProfile.setOnClickListener {
-            val email = editTextEmail.text.toString()
+            val userName = editTextEmail.text.toString()
             val birthDate = editTextBirthDate.text.toString()
             val selectedGender = when (radioGroupGender.checkedRadioButtonId) {
                 R.id.radioButtonMale -> "Male"
@@ -94,25 +100,48 @@ class ManageAccount : AppCompatActivity() {
 
             // Update user data in Firebase Database
             // Validating user's input
-            if(isEmailValid(email)) {
-                if (isDateOfBirthValid(birthDate)) {
-                    if (selectedGender == "Null") {
-                        ValidationError.text = "Please Select a gender"
+            usersRef.orderByChild("username").equalTo(userName).addListenerForSingleValueEvent(object : ValueEventListener {
+                @SuppressLint("SetTextI18n")
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        ValidationError.text = "Username already exists please choose a another one"
                     } else {
-                        val userData = User("", email, birthDate, selectedGender) // Empty string for username (no change)
-                        usersRef.setValue(userData)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    Toast.makeText(this@ManageAccount, "Profile updated", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    Toast.makeText(this@ManageAccount, "Failed to update profile", Toast.LENGTH_SHORT).show()
-                                }
+                        if (isDateOfBirthValid(birthDate)) {
+                            if (selectedGender == "Null") {
+                                ValidationError.text = "Please Select a gender"
+                            } else {
+                                val user = auth.currentUser
+                                val userData = User(userName, email, birthDate, selectedGender)
+                                usersRef.setValue(userData)
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            val profileUpdates = UserProfileChangeRequest.Builder()
+                                                .setDisplayName(userName) // Set the display name
+                                                .build()
+                                            user?.updateProfile(profileUpdates)
+                                                ?.addOnCompleteListener{ updateTask ->
+                                                    if (updateTask.isSuccessful) {
+                                                        Log.d("ManageAccount", "User display name updated")
+                                                    } else {
+                                                        Log.d("ManageAccount", "Error in updating the user's display name")
+                                                    }
+                                                }
+                                            Toast.makeText(this@ManageAccount, "Profile updated", Toast.LENGTH_SHORT).show()
+                                        } else {
+                                            Toast.makeText(this@ManageAccount, "Failed to update profile", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
                             }
+                        } else
+                            ValidationError.text = "Please enter a valid date of birth"
                     }
-                } else
-                    ValidationError.text = "Please enter a valid date of birth"
-            } else
-                ValidationError.text = "Please enter a valid email"
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error while checking for username existence
+                    Log.e("SignUpActivity", "Error checking username existence: ${databaseError.message}")
+                }
+            })
         }
     }
     data class User(
@@ -121,13 +150,6 @@ class ManageAccount : AppCompatActivity() {
         val birthDate: String = "",
         val gender: String = ""
     )
-    fun isEmailValid(Email: String): Boolean {
-        return if (Email.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(Email).matches()
-        } else {
-            Email.isNotBlank()
-        }
-    }
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 6
     }
