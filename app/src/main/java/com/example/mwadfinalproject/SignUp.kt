@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -81,25 +83,11 @@ class SignUp : AppCompatActivity() {
             val password2 = findViewById<EditText>(R.id.ConfoirmPasswordSignUpAct).text.toString()
             val genderGroup = findViewById<RadioGroup>(R.id.radioGroupSignUpAct)
             val ValidationError = findViewById<TextView>(R.id.ValidationTextSignUpAct)
-            val passwordFiled = findViewById<EditText>(R.id.passwordSignUpAct)
-            val showpass = findViewById<ImageView>(R.id.ShowPass)
-            val hidepass = findViewById<ImageView>(R.id.hidePass)
             val genderId = genderGroup.checkedRadioButtonId
             val selectedGender = when (genderId) {
                 R.id.MaleRadioSignUpAct -> "Male"
                 R.id.FemaleRadioSignUpAct -> "Female"
                 else -> "Null" // Handle if no gender is selected
-            }
-            showpass.setOnClickListener{
-                passwordFiled.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-                showpass.visibility = View.GONE
-                hidepass.visibility = View.VISIBLE
-            }
-
-            hidepass.setOnClickListener{
-                passwordFiled.inputType = InputType.TYPE_CLASS_TEXT
-                hidepass.visibility = View.GONE
-                showpass.visibility = View.VISIBLE
             }
             // Validating user's input
             if (isEmailValid(email))
